@@ -29,6 +29,10 @@ bts1.pinknoise <- imgnoise::imgnoise(bts1, 'uniform', -0.1, 0.1)
 
 bts1.SnPnoise <- imgnoise(bts1, 'salt_and_pepper')
 
+OpenImageR::writeImage(bts1.rotated, './img/bts1_rotated.jpg')
+writeImage(bts1.pinknoise, './img/bts1_pinknoise.jpg')
+writeImage(bts1.SnPnoise, './img/bts1_SnPnoise.jpg')
+
 # Grayscaling ---------------------------------------------------------------------------------------------------------
 bts1 <- OpenImageR::rgb_2gray(bts1)
 
