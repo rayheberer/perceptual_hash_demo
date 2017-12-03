@@ -5,11 +5,13 @@
 # Requirements --------------------------------------------------------------------------------------------------------
 install.packages('OpenImageR')
 install.packages('plumber')
+install.packages('httr')
 devtools::install_github("rayheberer/imgnoise")
 
 library(OpenImageR)
-library(plumber)
 library(imgnoise)
+
+library(plumber)
 
 library(e1071) # for Hamming distance
 
