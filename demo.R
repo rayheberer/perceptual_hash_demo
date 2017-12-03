@@ -4,9 +4,11 @@
 
 # Requirements --------------------------------------------------------------------------------------------------------
 install.packages('OpenImageR')
+install.packages('plumber')
 devtools::install_github("rayheberer/imgnoise")
 
 library(OpenImageR)
+library(plumber)
 library(imgnoise)
 
 library(e1071) # for Hamming distance
@@ -41,11 +43,11 @@ bts4 <- rgb_2gray(bts4)
 # Computing Hashes ----------------------------------------------------------------------------------------------------
 bts1.phash <- OpenImageR::phash(bts1)
 
-bts1.phash <- phash(bts1, MODE='binary')
+bts1.phash <- phash(bts1, MODE = 'binary')
 
-bts2.phash <- phash(bts2, MODE='binary')
-bts3.phash <- phash(bts3, MODE='binary')
-bts4.phash <- phash(bts4, MODE='binary')
+bts2.phash <- phash(bts2, MODE = 'binary')
+bts3.phash <- phash(bts3, MODE = 'binary')
+bts4.phash <- phash(bts4, MODE = 'binary')
 
 # Calculating Hamming Distance ----------------------------------------------------------------------------------------
 bts1.resized <- rgb_2gray(bts1.resized)
@@ -62,7 +64,13 @@ hash <- new.env()
 keys <- c('bts1', 'bts2', 'bts3', 'bts4')
 
 lapply(keys, function(k) {
-  hash[[k]] <- c(eval(parse(text=paste0(k,'.phash'))));
+  hash[[k]] <- c(eval(parse(text=paste0(k,'.phash'))))
+})
+
+lapply(hash, function(h) {
+  hamming.distance(h, c(bts1.resized.phash))
 })
 
 # Exposing an API that does the above steps ---------------------------------------------------------------------------
+api <- plumber::plumb('api.R')
+api$run(port = 8000)
