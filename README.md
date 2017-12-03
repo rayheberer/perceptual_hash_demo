@@ -1,4 +1,4 @@
-# perceptual_hash_demo
+# Perceptual Hashing for Near-Duplicate Detection
 Code Demo for December 2018 [Applied R Munich](https://www.meetup.com/Applied-R-Munich/) Meetup
 
 ### Presentation
