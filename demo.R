@@ -25,7 +25,8 @@ imageShow('./img/bts2.jpg')
 bts1.resized <- OpenImageR::resizeImage(bts1, 250, 250)
 imageShow(bts1.resized)
 
-bts1.rotated <- OpenImageR::rotateImage(bts1, 10)
+bts1.rotated <- OpenImageR::rotateImage(bts1, 5)
+bts1.rotated2 <- rotateImage(bts1, 10)
 
 bts1.pinknoise <- imgnoise::imgnoise(bts1, 'uniform', -0.1, 0.1)
 
@@ -33,6 +34,7 @@ bts1.SnPnoise <- imgnoise(bts1, 'salt_and_pepper')
 
 OpenImageR::writeImage(bts1.resized, './img/bts1_resized.jpg')
 writeImage(bts1.rotated, './img/bts1_rotated.jpg')
+writeImage(bts1.rotated2, './img/bts1_rotated2.jpg')
 writeImage(bts1.pinknoise, './img/bts1_pinknoise.jpg')
 writeImage(bts1.SnPnoise, './img/bts1_SnPnoise.jpg')
 
