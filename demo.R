@@ -47,9 +47,6 @@ bts2.phash <- phash(bts2, MODE='binary')
 bts3.phash <- phash(bts3, MODE='binary')
 bts4.phash <- phash(bts4, MODE='binary')
 
-# Creating Hash Table using R Environment -----------------------------------------------------------------------------
-
-
 # Calculating Hamming Distance ----------------------------------------------------------------------------------------
 bts1.resized <- rgb_2gray(bts1.resized)
 bts1.resized.phash <- phash(bts1.resized, MODE='binary')
@@ -57,6 +54,15 @@ bts1.resized.phash <- phash(bts1.resized, MODE='binary')
 e1071::hamming.distance(bts1.resized.phash, bts1.phash) # should throw error
 
 hamming.distance(as.vector(bts1.resized.phash), as.vector(bts1.phash))
+hamming.distance(c(bts2.phash), c(bts1.phash))
 
+# Creating Hash Table using R Environment -----------------------------------------------------------------------------
+hash <- new.env()
+
+keys <- c('bts1', 'bts2', 'bts3', 'bts4')
+
+lapply(keys, function(k) {
+  hash[[k]] <- c(eval(parse(text=paste0(k,'.phash'))));
+})
 
 # Exposing an API that does the above steps ---------------------------------------------------------------------------
