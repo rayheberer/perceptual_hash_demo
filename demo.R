@@ -75,6 +75,8 @@ lapply(hash, function(h) {
   hamming.distance(h, c(bts1.resized.phash))
 })
 
+saveRDS(hash, './data/hash_table.rds')
+
 # Exposing an API that does the above steps ---------------------------------------------------------------------------
 api <- plumber::plumb('api.R')
 api$run(port = 8000)
